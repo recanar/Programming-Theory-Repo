@@ -8,15 +8,18 @@ public class PlayerController : MonoBehaviour
 {
 
 	public float speed;
-	public float jumpHeight;
-    public Text countText;
+	[SerializeField] private float _cubeRollSpeed = 18;
+	private bool _isCubeMoving;
+
+	public Text countText;
     public Text winText;
-    private bool isGrounded; 
 	public int numPickups;
+
+	private bool isGrounded; 
 
 	private Rigidbody rb;
 	private int count;
-	PlayerBall player = new PlayerBall();
+    private readonly PlayerBall player = new PlayerBall();
 
 	void Start()
 	{
@@ -28,11 +31,13 @@ public class PlayerController : MonoBehaviour
 
 	void FixedUpdate()
 	{
-		MoveBallPlayer();
+		//MoveBallPlayer();
 	}
     private void Update()
-    {
-		Jump();//space button make player jump
+	{
+		if (_isCubeMoving) return;
+		MoveCubePlayer();
+		Jump();//space button makes player jump
 	}
 
 
@@ -53,13 +58,34 @@ public class PlayerController : MonoBehaviour
     }
 	private void Jump()
 	{
-		if (Input.GetKeyDown("space") && isGrounded)
+		if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
 		{
-			Vector3 jump = new Vector3(0.0f, jumpHeight, 0.0f);
-			rb.AddForce(jump);
+			rb.AddForce(player.Jump());//player.Jump() return's player's jump vector for ball
 		}
 	}
-
+	private void MoveCubePlayer()
+	{
+		if (Input.GetKeyDown(KeyCode.A)) Assemble(Vector3.left);
+		else if (Input.GetKeyDown(KeyCode.D)) Assemble(Vector3.right);
+		else if (Input.GetKeyDown(KeyCode.W)) Assemble(Vector3.forward);
+		else if (Input.GetKeyDown(KeyCode.S)) Assemble(Vector3.back);
+	}
+	private void Assemble(Vector3 dir)
+    {
+		var anchor = transform.position +(Vector3.down+dir)*0.5f;
+		var axis = Vector3.Cross(Vector3.up, dir);
+		StartCoroutine(RollCube(anchor, axis));
+	}
+	IEnumerator RollCube(Vector3 anchor, Vector3 axis)
+    {
+		_isCubeMoving = true;
+        for (int i = 0; i < (90/_cubeRollSpeed); i++)
+        {
+			transform.RotateAround(anchor, axis, _cubeRollSpeed);
+			yield return new WaitForSeconds(0.005f);
+		}
+		_isCubeMoving = false;
+    }
 	private void MoveBallPlayer()
 	{
 		rb.AddForce(player.MovePlayer() * speed);//player.MovePlayer() returns player's movement vector for ball

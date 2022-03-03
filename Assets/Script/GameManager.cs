@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Cube : Shape
+public class GameManager : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -14,9 +14,5 @@ public class Cube : Shape
     void Update()
     {
         
-    }
-    public override void GiveColor(Color color)
-    {
-        throw new System.NotImplementedException();
     }
 }
