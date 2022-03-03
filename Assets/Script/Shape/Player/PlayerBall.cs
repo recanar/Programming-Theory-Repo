@@ -12,8 +12,6 @@ public class PlayerBall : Player
         Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
 
         return movement;
-
-        rb.AddForce(movement * speed);
     }
 
 }

@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
 
 	private Rigidbody rb;
 	private int count;
+	PlayerBall player = new PlayerBall();
 
 	void Start()
 	{
@@ -23,26 +24,17 @@ public class PlayerController : MonoBehaviour
 		count = 0;
 		//SetCountText();
 		//winText.text = "";
-		PlayerBall player = new PlayerBall();
 	}
 
 	void FixedUpdate()
 	{
-		MovePlayer();
+		MoveBallPlayer();
 	}
     private void Update()
     {
-		if (Input.GetKeyDown("space")&&isGrounded)
-		{
-			Vector3 jump = new Vector3(0.0f, jumpHeight, 0.0f);
-			rb.AddForce(jump);
-		}
+		Jump();//space button make player jump
 	}
 
-    private void MovePlayer()
-    {
-		
-	}
 
     void OnCollisionEnter(Collision collision)
     {
@@ -59,6 +51,19 @@ public class PlayerController : MonoBehaviour
             isGrounded = false;
         }
     }
+	private void Jump()
+	{
+		if (Input.GetKeyDown("space") && isGrounded)
+		{
+			Vector3 jump = new Vector3(0.0f, jumpHeight, 0.0f);
+			rb.AddForce(jump);
+		}
+	}
+
+	private void MoveBallPlayer()
+	{
+		rb.AddForce(player.MovePlayer() * speed);//player.MovePlayer() returns player's movement vector for ball
+	}
 	void SetCountText()
 	{
 		countText.text = "Count: " + count.ToString();
