@@ -5,6 +5,11 @@ using UnityEngine;
 public class PlayerBall : Player
 {
     private readonly float jumpHeight=250;
+    public float speed=10;
+    public void MoveBallPlayer(Rigidbody rb)
+    {
+        rb.AddForce(MovePlayer() * speed);//player.MovePlayer() returns player's movement vector for ball
+    }
     public override Vector3 MovePlayer()
     {
         float moveHorizontal = Input.GetAxis("Horizontal");
@@ -21,6 +26,5 @@ public class PlayerBall : Player
     }
     public override void GiveColor()
     {
-        throw new System.NotImplementedException();
     }
 }

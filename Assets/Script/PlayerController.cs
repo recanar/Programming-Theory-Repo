@@ -6,11 +6,7 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
-
-	public float speed;
-	[SerializeField] private float _cubeRollSpeed = 18;
-	private bool _isCubeMoving;
-
+	private int count;
 	public Text countText;
     public Text winText;
 	public int numPickups;
@@ -18,11 +14,14 @@ public class PlayerController : MonoBehaviour
 	private bool isGrounded; 
 
 	private Rigidbody rb;
-	private int count;
-    private readonly PlayerBall player = new PlayerBall();
+    private PlayerBall playerBall;
+	private PlayerCube playerCube;
+	private string currentShapeOfPlayer="cube";
 
 	void Start()
 	{
+		playerCube = gameObject.AddComponent<PlayerCube>();
+		playerBall = gameObject.AddComponent<PlayerBall>();
 		rb = GetComponent<Rigidbody>();
 		count = 0;
 		//SetCountText();
@@ -31,12 +30,19 @@ public class PlayerController : MonoBehaviour
 
 	void FixedUpdate()
 	{
-		//MoveBallPlayer();
+        if(currentShapeOfPlayer=="ball")
+		{
+			playerBall.MoveBallPlayer(rb);
+		}
+		if (currentShapeOfPlayer == "cube")
+		{
+			if (playerCube._isCubeMoving) return;
+			playerCube.MoveCubePlayer();
+		}
 	}
     private void Update()
 	{
-		if (_isCubeMoving) return;
-		MoveCubePlayer();
+		
 		Jump();//space button makes player jump
 	}
 
@@ -60,36 +66,10 @@ public class PlayerController : MonoBehaviour
 	{
 		if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
 		{
-			rb.AddForce(player.Jump());//player.Jump() return's player's jump vector for ball
+			rb.AddForce(playerBall.Jump());//player.Jump() return's player's jump vector for ball
 		}
 	}
-	private void MoveCubePlayer()
-	{
-		if (Input.GetKeyDown(KeyCode.A)) Assemble(Vector3.left);
-		else if (Input.GetKeyDown(KeyCode.D)) Assemble(Vector3.right);
-		else if (Input.GetKeyDown(KeyCode.W)) Assemble(Vector3.forward);
-		else if (Input.GetKeyDown(KeyCode.S)) Assemble(Vector3.back);
-	}
-	private void Assemble(Vector3 dir)
-    {
-		var anchor = transform.position +(Vector3.down+dir)*0.5f;
-		var axis = Vector3.Cross(Vector3.up, dir);
-		StartCoroutine(RollCube(anchor, axis));
-	}
-	IEnumerator RollCube(Vector3 anchor, Vector3 axis)
-    {
-		_isCubeMoving = true;
-        for (int i = 0; i < (90/_cubeRollSpeed); i++)
-        {
-			transform.RotateAround(anchor, axis, _cubeRollSpeed);
-			yield return new WaitForSeconds(0.005f);
-		}
-		_isCubeMoving = false;
-    }
-	private void MoveBallPlayer()
-	{
-		rb.AddForce(player.MovePlayer() * speed);//player.MovePlayer() returns player's movement vector for ball
-	}
+	
 	void SetCountText()
 	{
 		countText.text = "Count: " + count.ToString();
