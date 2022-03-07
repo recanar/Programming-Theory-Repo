@@ -11,12 +11,15 @@ public class PlayerController : MonoBehaviour
     public Text winText;
 	public int numPickups;
 
+	public GameObject cube;
+	public GameObject ball;
+
 	private bool isGrounded; 
 
 	private Rigidbody rb;
     private PlayerBall playerBall;
 	private PlayerCube playerCube;
-	private string currentShapeOfPlayer="cube";
+	public bool isCube;
 
 	void Start()
 	{
@@ -30,19 +33,22 @@ public class PlayerController : MonoBehaviour
 
 	void FixedUpdate()
 	{
-        if(currentShapeOfPlayer=="ball")
+		if (gameObject.CompareTag("Ball"))
 		{
 			playerBall.MoveBallPlayer(rb);
 		}
-		if (currentShapeOfPlayer == "cube")
+		else if (gameObject.CompareTag("Cube"))
 		{
+			Debug.Log("cube");
 			if (playerCube._isCubeMoving) return;
 			playerCube.MoveCubePlayer();
 		}
+
 	}
     private void Update()
 	{
 		
+
 		Jump();//space button makes player jump
 	}
 
@@ -54,6 +60,15 @@ public class PlayerController : MonoBehaviour
             isGrounded = true;
         }
     }
+    private void OnTriggerEnter(Collider other)
+    {
+		if (other.gameObject.CompareTag("Collectible"))
+		{
+			ball.SetActive(false);
+			cube.SetActive(true);
+			Destroy(other.gameObject);
+		}
+	}
 
     void OnCollisionExit(Collision collision)
     {

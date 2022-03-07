@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
+  - Ball
+  - Cube
+  - Collectible
   layers:
   - Default
   - TransparentFX
