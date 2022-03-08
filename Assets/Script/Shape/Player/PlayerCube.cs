@@ -2,11 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerCube : MonoBehaviour
+public class PlayerCube : Player
 {
     public bool _isCubeMoving;
 	[SerializeField] private float _cubeRollSpeed = 18;
-
+    private void FixedUpdate()
+    {
+		if (_isCubeMoving) return;
+		MovePlayer();
+	}
+	public override void MovePlayer()
+	{
+		MoveCubePlayer();
+	}
 	public void MoveCubePlayer()
 	{
 		float moveHorizontal = Input.GetAxis("Horizontal");
@@ -33,4 +41,9 @@ public class PlayerCube : MonoBehaviour
 		}
 		_isCubeMoving = false;
 	}
+    public override void GiveColor()
+    {
+        throw new System.NotImplementedException();
+    }
+    
 }
