@@ -8,4 +8,8 @@ public class Collectible : NonMove
     {
         throw new System.NotImplementedException();
     }
+    void Update()
+    {
+        transform.Rotate(new Vector3(15, 30, 45) * Time.deltaTime);
+    }
 }

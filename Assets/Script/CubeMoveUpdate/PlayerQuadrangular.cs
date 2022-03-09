@@ -27,6 +27,8 @@ public class PlayerQuadrangular : MonoBehaviour
 	}
 	void FixedUpdate()
 	{
+
+		scale = transform.lossyScale;
 		MovePlayer();
 	}
 	private void MovePlayer()
