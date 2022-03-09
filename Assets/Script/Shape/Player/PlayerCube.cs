@@ -15,7 +15,8 @@ public class PlayerCube : Player
 	{
 		MoveCubePlayer();
 	}
-	public void MoveCubePlayer()
+    #region CubeMover
+    public void MoveCubePlayer()
 	{
 		float moveHorizontal = Input.GetAxis("Horizontal");
 		float moveVertical = Input.GetAxis("Vertical");
@@ -41,6 +42,7 @@ public class PlayerCube : Player
 		}
 		_isCubeMoving = false;
 	}
+    #endregion
     public override void GiveColor()
     {
         throw new System.NotImplementedException();

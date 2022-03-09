@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class cube : MonoBehaviour
+public class PlayerQuadrangular : MonoBehaviour
 {
 
 	public float rotationPeriod = 0.3f;     // 隣に移動するのにかかる時間
@@ -21,22 +21,26 @@ public class cube : MonoBehaviour
 	// Use this for initialization
 	void Start()
 	{
-
-		// 直方体のサイズを取得
+		// Get scale of object
 		scale = transform.lossyScale;
 		//Debug.Log ("[x, y, z] = [" + scale.x + ", " + scale.y + ", " + scale.z + "]");
-
 	}
-
-	// Update is called once per frame
-	void Update()
+	void FixedUpdate()
 	{
-
+		MovePlayer();
+	}
+	private void MovePlayer()
+    {
+		CubeUpdate();
+		CubeFixedUpdate();
+	}
+	private void CubeUpdate()
+	{
 		float x = 0;
-		float y = 0;
+		float y;
 
 		// キー入力を拾う。
-		y = Input.GetAxisRaw("Horizontal")*(-1);
+		y = Input.GetAxisRaw("Horizontal") * (-1);
 		if (y == 0)
 		{
 			x = Input.GetAxisRaw("Vertical");
@@ -53,15 +57,13 @@ public class cube : MonoBehaviour
 			transform.Rotate(directionZ * 90, 0, directionX * 90, Space.World);     // 転方向に90度回転させる
 			toRotation = transform.rotation;                                           // 回転後のクォータニオンを保持
 			transform.rotation = fromRotation;                                         // CubeのRotationを回転前に戻す。（transformのシャローコピーとかできないんだろうか…。）
-			setRadius();                                                               // 回転半径を計算
+			SetRadius();                                                               // 回転半径を計算
 			rotationTime = 0;                                                          // 回転中の経過時間を0に。
 			isRotate = true;                                                           // 回転中フラグをたてる。
 		}
 	}
-
-	void FixedUpdate()
-	{
-
+	private void CubeFixedUpdate()
+    {
 		if (isRotate)
 		{
 
@@ -73,10 +75,9 @@ public class cube : MonoBehaviour
 			float distanceX = -directionX * radius * (Mathf.Cos(startAngleRad) - Mathf.Cos(startAngleRad + thetaRad));      // X軸の移動距離。 -の符号はキーと移動の向きを合わせるため。
 			float distanceY = radius * (Mathf.Sin(startAngleRad + thetaRad) - Mathf.Sin(startAngleRad));                        // Y軸の移動距離
 			float distanceZ = directionZ * radius * (Mathf.Cos(startAngleRad) - Mathf.Cos(startAngleRad + thetaRad));           // Z軸の移動距離
-			transform.position = new Vector3(startPos.x + distanceX, startPos.y + distanceY, startPos.z + distanceZ);           // 現在の位置をセット
-
+			
 			// 回転
-			transform.rotation = Quaternion.Lerp(fromRotation, toRotation, ratio);      // Quaternion.Lerpで現在の回転角をセット（なんて便利な関数）
+			transform.SetPositionAndRotation(new Vector3(startPos.x + distanceX, startPos.y + distanceY, startPos.z + distanceZ), Quaternion.Lerp(fromRotation, toRotation, ratio));      // Quaternion.Lerpで現在の回転角をセット（なんて便利な関数）
 
 			// 移動・回転終了時に各パラメータを初期化。isRotateフラグを下ろす。
 			if (ratio == 1)
@@ -88,8 +89,7 @@ public class cube : MonoBehaviour
 			}
 		}
 	}
-
-	void setRadius()
+	void SetRadius()
 	{
 
 		Vector3 dirVec = new Vector3(0, 0, 0);          // 移動方向ベクトル

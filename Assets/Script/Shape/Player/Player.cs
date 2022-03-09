@@ -14,7 +14,6 @@ public abstract class Player : Shape
 
     private void Start()
     {
-        
         rb = GetComponent<Rigidbody>();
     }
     private void Update()

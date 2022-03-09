@@ -9,18 +9,6 @@ public class GameManager : MonoBehaviour
     public Text countText;
     public Text winText;
     public int numPickups;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     void SetCountText()
     {
         countText.text = "Count: " + count.ToString();
