@@ -15,6 +15,10 @@ public class PlayerCube : Player
 	{
 		MoveCubePlayer();
 	}
+    private void OnEnable()
+    {
+		_isCubeMoving = false;
+    }
     #region CubeMover
     public void MoveCubePlayer()
 	{
@@ -47,5 +51,4 @@ public class PlayerCube : Player
     {
         throw new System.NotImplementedException();
     }
-    
 }

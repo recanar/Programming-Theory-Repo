@@ -9,10 +9,10 @@ public class GameManager : MonoBehaviour
     public Text countText;
     public Text winText;
     public int numPickups;
-    [SerializeField]private string currentPlayerShape;
 
     public GameObject player;
     public List<GameObject> playerShapes;
+    public Vector3 playerPosition;
     public static GameManager Instance { get; private set; }
     private void Awake()
     {
@@ -35,12 +35,11 @@ public class GameManager : MonoBehaviour
     }
     public void PlayerShapeChange(string tag)
     {
-        currentPlayerShape = tag;
-
         for (int i = 0; i < player.transform.childCount; i++)
         {
-            if (player.transform.GetChild(i).gameObject.CompareTag("PlayerCube"))
+            if (player.transform.GetChild(i).gameObject.CompareTag(tag))
             {
+                player.transform.GetChild(i).position = playerPosition;
                 player.transform.GetChild(i).gameObject.SetActive(true);
             }
         }

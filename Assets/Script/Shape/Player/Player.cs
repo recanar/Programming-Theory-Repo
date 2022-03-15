@@ -24,7 +24,7 @@ public abstract class Player : Shape
     {
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
-            rb.AddForce(JumpVector());//player.Jump() return's player's jump vector for ball
+            rb.AddForce(JumpVector());//player.Jump() return's player's jump vector
         }
     }
     public Vector3 JumpVector()
@@ -48,12 +48,26 @@ public abstract class Player : Shape
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("CubeChanger"))
+        if (!gameObject.CompareTag("PlayerCube")&& other.gameObject.CompareTag("CubeChanger"))
         {
+            ResetMove();
             GameManager.Instance.IncreasePoint();
+            GameManager.Instance.playerPosition = transform.position;
             gameObject.SetActive(false);
-            GameManager.Instance.PlayerShapeChange("cube");
-            Destroy(other.gameObject);
+            GameManager.Instance.PlayerShapeChange("PlayerCube");
         }
+        else if (!gameObject.CompareTag("PlayerBall") && other.gameObject.CompareTag("BallChanger"))
+        {
+            ResetMove();
+            GameManager.Instance.IncreasePoint();
+            GameManager.Instance.playerPosition = transform.position;
+            gameObject.SetActive(false);
+            GameManager.Instance.PlayerShapeChange("PlayerBall");
+        }
+    }
+    private void ResetMove()//resets physics force on player before change shape type
+    {
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
     }
 }
