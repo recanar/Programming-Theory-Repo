@@ -280,6 +280,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 540566582}
+  - component: {fileID: 540566583}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -301,6 +302,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &540566583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 540566581}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bafdbbb71d16acb44a0886d521829692, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  count: 0
+  countText: {fileID: 0}
+  winText: {fileID: 0}
+  numPickups: 0
+  currentPlayerShape: 
+  player: {fileID: 1636351550}
+  playerShapes: []
 --- !u!1 &614230954
 GameObject:
   m_ObjectHideFlags: 0
@@ -487,6 +507,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 329048469720066773, guid: da71a071a03d53d42ae20bc6966bcb34, type: 3}
+      propertyPath: m_TagString
+      value: PlayerBall
+      objectReference: {fileID: 0}
     - target: {fileID: 1507053907183625882, guid: da71a071a03d53d42ae20bc6966bcb34, type: 3}
       propertyPath: playerBall
       value: 
@@ -495,6 +519,10 @@ PrefabInstance:
       propertyPath: playerCube
       value: 
       objectReference: {fileID: 964601635}
+    - target: {fileID: 1507053907183625882, guid: da71a071a03d53d42ae20bc6966bcb34, type: 3}
+      propertyPath: gameManager
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 6719008469639760470, guid: da71a071a03d53d42ae20bc6966bcb34, type: 3}
       propertyPath: ball
       value: 
@@ -649,8 +677,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5b0182f3961a294b9f72bcb7f7195f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerBall: {fileID: 925287800}
-  playerCube: {fileID: 964601635}
   _isCubeMoving: 0
   _cubeRollSpeed: 12
 --- !u!1 &990199668
@@ -763,7 +789,7 @@ GameObject:
   - component: {fileID: 1392978238}
   m_Layer: 0
   m_Name: CubeChanger
-  m_TagString: Collectible
+  m_TagString: CubeChanger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1219,7 +1245,7 @@ GameObject:
   - component: {fileID: 1887259845}
   - component: {fileID: 1887259844}
   m_Layer: 0
-  m_Name: Cube (1)
+  m_Name: TestCube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1444,7 +1470,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7456859658178450149, guid: 17e0ae6a45863e14fa6563cce6bb6a2d, type: 3}
       propertyPath: m_TagString
-      value: Cube
+      value: PlayerCube
       objectReference: {fileID: 0}
     - target: {fileID: 7456859658178450159, guid: 17e0ae6a45863e14fa6563cce6bb6a2d, type: 3}
       propertyPath: m_RootOrder

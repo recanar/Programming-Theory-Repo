@@ -5,9 +5,11 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
-  - Ball
-  - Cube
   - Collectible
+  - PlayerCube
+  - PlayerBall
+  - CubeChanger
+  - Ball
   layers:
   - Default
   - TransparentFX

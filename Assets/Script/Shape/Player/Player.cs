@@ -8,8 +8,6 @@ public abstract class Player : Shape
     private readonly float jumpHeight = 250;
     public override abstract void GiveColor();
     protected Rigidbody rb;
-    public GameObject playerBall;
-    public GameObject playerCube;
 
 
     private void Start()
@@ -50,10 +48,11 @@ public abstract class Player : Shape
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Collectible"))
+        if (other.gameObject.CompareTag("CubeChanger"))
         {
-            playerBall.SetActive(false);
-            playerCube.SetActive(true);
+            GameManager.Instance.IncreasePoint();
+            gameObject.SetActive(false);
+            GameManager.Instance.PlayerShapeChange("cube");
             Destroy(other.gameObject);
         }
     }

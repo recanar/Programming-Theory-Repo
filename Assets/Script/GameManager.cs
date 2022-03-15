@@ -5,14 +5,49 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    private int count;
+    public int count;
     public Text countText;
     public Text winText;
     public int numPickups;
+    [SerializeField]private string currentPlayerShape;
 
+    public GameObject player;
+    public List<GameObject> playerShapes;
+    public static GameManager Instance { get; private set; }
+    private void Awake()
+    {
+        //singleton
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+    }
+    public void Start()
+    {
+        playerShapes = new List<GameObject>();
+        for (int i = 0; i < player.transform.childCount; i++)
+        {
+            playerShapes.Add(player.transform.GetChild(i).gameObject);
+        }
+    }
     public void PlayerShapeChange(string tag)
     {
-        GameObject.FindWithTag(tag).SetActive(true);
+        currentPlayerShape = tag;
+
+        for (int i = 0; i < player.transform.childCount; i++)
+        {
+            if (player.transform.GetChild(i).gameObject.CompareTag("PlayerCube"))
+            {
+                player.transform.GetChild(i).gameObject.SetActive(true);
+            }
+        }
+    }
+    public void IncreasePoint()
+    {
+        count++;
     }
     void SetCountText()
     {
