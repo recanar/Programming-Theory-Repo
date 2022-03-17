@@ -1,14 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+
 
 public class GameManager : MonoBehaviour
 {
     public int count;
     public Text countText;
     public Text winText;
-    public int numPickups;
+    public int numPickups=6;
+    public TextMeshProUGUI pointText;
 
     public GameObject player;
     public List<GameObject> playerShapes;
@@ -25,13 +28,17 @@ public class GameManager : MonoBehaviour
 
         Instance = this;
     }
-    public void Start()
+    private void Start()
     {
         playerShapes = new List<GameObject>();
         for (int i = 0; i < player.transform.childCount; i++)
         {
             playerShapes.Add(player.transform.GetChild(i).gameObject);
         }
+    }
+    private void Update()
+    {
+        pointText.text = "Points:" + count;
     }
     public void PlayerShapeChange(string tag)
     {
@@ -47,13 +54,5 @@ public class GameManager : MonoBehaviour
     public void IncreasePoint()
     {
         count++;
-    }
-    void SetCountText()
-    {
-        countText.text = "Count: " + count.ToString();
-        if (count >= numPickups)
-        {
-            winText.text = "You win!";
-        }
     }
 }

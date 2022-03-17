@@ -11,6 +11,7 @@ TagManager:
   - CubeChanger
   - Ball
   - BallChanger
+  - Point
   layers:
   - Default
   - TransparentFX
