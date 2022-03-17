@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerCube : Player
 {
     public bool _isCubeMoving;
-	[SerializeField] private float _cubeRollSpeed = 18;
+	[SerializeField] private readonly float _cubeRollSpeed = 18;
     private void FixedUpdate()
     {
 		if (_isCubeMoving) return;

@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 329048469720066770}
   - component: {fileID: 329048469720066769}
   - component: {fileID: 329048469720066768}
-  - component: {fileID: 6719008469639760470}
   - component: {fileID: 1418001093698788136}
   - component: {fileID: 1507053907183625882}
   m_Layer: 0
@@ -98,24 +97,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &6719008469639760470
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 329048469720066773}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 729f4d3d08823994283db8375baef353, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  countText: {fileID: 0}
-  winText: {fileID: 0}
-  numPickups: 0
-  cube: {fileID: 0}
-  ball: {fileID: 0}
-  isCube: 0
 --- !u!54 &1418001093698788136
 Rigidbody:
   m_ObjectHideFlags: 0

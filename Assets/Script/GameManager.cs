@@ -7,15 +7,15 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public int count;
-    public Text countText;
-    public Text winText;
+    public int point;
     public int numPickups=6;
     public TextMeshProUGUI pointText;
 
     public GameObject player;
     public List<GameObject> playerShapes;
     public Vector3 playerPosition;
+    int currentLevel = 1;
+    [SerializeField]GameObject[] levels;
     public static GameManager Instance { get; private set; }
     private void Awake()
     {
@@ -36,9 +36,17 @@ public class GameManager : MonoBehaviour
             playerShapes.Add(player.transform.GetChild(i).gameObject);
         }
     }
-    private void Update()
+    private void FixedUpdate()
     {
-        pointText.text = "Points:" + count;
+        pointText.text = "Points:" + point;
+        if (point == 6)
+        {
+            LevelUp();
+            levels[currentLevel - 1].SetActive(false);
+            levels[currentLevel].SetActive(true);
+            point = 0;
+            currentLevel++;
+        }
     }
     public void PlayerShapeChange(string tag)
     {
@@ -53,6 +61,13 @@ public class GameManager : MonoBehaviour
     }
     public void IncreasePoint()
     {
-        count++;
+        point++;
+    }
+    public void LevelUp()
+    {
+        for (int i = 0; i < playerShapes.Count; i++)
+        {
+            playerShapes[i].transform.position = Vector3.up;
+        }
     }
 }
