@@ -22,7 +22,4 @@ public class PlayerBall : Player
 
         return movement;
     }
-    public override void GiveColor()
-    {
-    }
 }

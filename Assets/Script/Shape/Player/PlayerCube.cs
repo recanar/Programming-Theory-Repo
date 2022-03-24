@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class PlayerCube : Player
 {
-    public bool _isCubeMoving;
-	[SerializeField] private readonly float _cubeRollSpeed = 18;
+    private bool _isCubeMoving;
+	private readonly float _cubeRollSpeed = 18;
     private void FixedUpdate()
     {
 		if (_isCubeMoving) return;
@@ -47,8 +47,4 @@ public class PlayerCube : Player
 		_isCubeMoving = false;
 	}
     #endregion
-    public override void GiveColor()
-    {
-        throw new System.NotImplementedException();
-    }
 }

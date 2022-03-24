@@ -12,6 +12,7 @@ TagManager:
   - Ball
   - BallChanger
   - Point
+  - Wall
   layers:
   - Default
   - TransparentFX

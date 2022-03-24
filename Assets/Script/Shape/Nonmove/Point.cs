@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class Point : NonMove
 {
-    public override void GiveColor()
-    {
-        throw new System.NotImplementedException();
-    }
     void Update()
     {
         transform.Rotate(new Vector3(0, 45, 0) * Time.deltaTime);

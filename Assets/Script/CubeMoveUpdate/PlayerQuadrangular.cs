@@ -1,42 +1,38 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerQuadrangular : MonoBehaviour
+public class PlayerQuadrangular : Player
 {
 
-	public float rotationPeriod = 0.3f;     // 隣に移動するのにかかる時間
-	Vector3 scale;                          // 直方体のサイズ
+	public float rotationPeriod = 0.3f;     
+	Vector3 scale;
 
-	bool isRotate = false;                  // Cubeが回転中かどうかを検出するフラグ
-	float directionX = 0;                   // 回転方向フラグ
-	float directionZ = 0;                   // 回転方向フラグ
+	bool isRotate = false;
+	float directionX = 0;
+	float directionZ = 0;
 
-	float startAngleRad = 0;                // 回転前の重心の水平面からの角度
-	Vector3 startPos;                       // 回転前のCubeの位置
-	float rotationTime = 0;                 // 回転中の時間経過
-	float radius = 1;                       // 重心の軌道半径 (とりあえず仮で1)
-	Quaternion fromRotation;                // 回転前のCubeのクォータニオン
-	Quaternion toRotation;                  // 回転後のCubeのクォータニオン
+	float startAngleRad = 0;
+	Vector3 startPos;
+	float rotationTime = 0;
+	float radius = 1;
+	Quaternion fromRotation;
+	Quaternion toRotation;
 
-	// Use this for initialization
-	void Start()
+	void FixedUpdate()
 	{
 		// Get scale of object
 		scale = transform.lossyScale;
-		//Debug.Log ("[x, y, z] = [" + scale.x + ", " + scale.y + ", " + scale.z + "]");
-	}
-	void FixedUpdate()
-	{
-
-		scale = transform.lossyScale;
 		MovePlayer();
 	}
-	private void MovePlayer()
+	public override void MovePlayer()
     {
-		CubeUpdate();
-		CubeFixedUpdate();
+		GetCubeMove();
+		RollCube();
 	}
-	private void CubeUpdate()
+    protected override void Jump()
+    {
+    }
+    private void GetCubeMove()
 	{
 		float x = 0;
 		float y;
@@ -64,7 +60,7 @@ public class PlayerQuadrangular : MonoBehaviour
 			isRotate = true;                                                           // 回転中フラグをたてる。
 		}
 	}
-	private void CubeFixedUpdate()
+	private void RollCube()
     {
 		if (isRotate)
 		{

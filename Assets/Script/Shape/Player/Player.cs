@@ -4,9 +4,8 @@ using UnityEngine;
 
 public abstract class Player : Shape
 {
-    private bool isGrounded;
-    private readonly float jumpHeight = 250;
-    public override abstract void GiveColor();
+    public bool isGrounded;
+    protected float jumpHeight = 250;
     protected Rigidbody rb;
 
 
@@ -27,7 +26,7 @@ public abstract class Player : Shape
             rb.AddForce(JumpVector());//player.Jump() return's player's jump vector
         }
     }
-    public Vector3 JumpVector()
+    private Vector3 JumpVector()
     {
         Vector3 jump = new Vector3(0.0f, jumpHeight, 0.0f);
         return jump;

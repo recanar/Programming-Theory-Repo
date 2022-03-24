@@ -4,6 +4,5 @@ using UnityEngine;
 
 public abstract class Shape:MonoBehaviour
 {
-    public abstract void GiveColor();
-    
+    protected Color shapeColor;
 }

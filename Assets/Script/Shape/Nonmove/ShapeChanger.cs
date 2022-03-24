@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class ShapeChanger : NonMove
 {
-    public override void GiveColor()
-    {
-        throw new System.NotImplementedException();
-    }
     void Update()
     {
         transform.Rotate(new Vector3(15, 30, 45) * Time.deltaTime);
