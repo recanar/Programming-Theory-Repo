@@ -5,16 +5,27 @@ using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
-    [SerializeField] GameObject[] levels;
+    [SerializeField] List<GameObject> levels;
     int currentLevel=1;
 
     public int numPickups = 6;
     [SerializeField] private TextMeshProUGUI pointText;
 
+    private void Start()
+    {
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            levels.Add(transform.GetChild(i).gameObject);
+        }
+    }
     // Update is called once per frame
     void Update()
     {
-        pointText.text = "Points:" + GameManager.Instance.point;
+        pointText.text = "Points:" + GameManager.Instance.point+"/6";
+        LevelUpWithPoint();
+    }
+    void LevelUpWithPoint()
+    {
         if (GameManager.Instance.point == 6)
         {
             GameManager.Instance.LevelUp();

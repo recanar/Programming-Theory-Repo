@@ -170,7 +170,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levels: []
   numPickups: 6
-  pointText: {fileID: 0}
+  pointText: {fileID: 734158571}
 --- !u!1 &491494420
 GameObject:
   m_ObjectHideFlags: 0

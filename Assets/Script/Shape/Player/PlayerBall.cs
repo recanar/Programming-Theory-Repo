@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerBall : Player
 {
-    public float speed=10;
+    [SerializeField]float speed=10;
     private void FixedUpdate()
     {
         MovePlayer();
