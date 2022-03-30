@@ -4,9 +4,11 @@ using UnityEngine;
 
 public abstract class Player : Shape
 {
-    public bool isGrounded;
-    protected float jumpHeight = 250;
+    protected bool isGrounded;
     protected Rigidbody rb;
+
+    [SerializeField]float speed = 10;
+    [SerializeField]protected float jumpHeight = 250;
 
 
     private void Start()
@@ -18,7 +20,10 @@ public abstract class Player : Shape
         Jump();//space button makes player jump
     }
 
-    public abstract void MovePlayer();
+    public virtual void MovePlayer()
+    {
+        rb.AddForce(MovePlayerVector() * speed);
+    }
     protected virtual void Jump()
     {
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
@@ -26,10 +31,19 @@ public abstract class Player : Shape
             rb.AddForce(JumpVector());//player.Jump() return's player's jump vector
         }
     }
-    private Vector3 JumpVector()
+    protected virtual Vector3 JumpVector()
     {
         Vector3 jump = new Vector3(0.0f, jumpHeight, 0.0f);
         return jump;
+    }
+    protected virtual Vector3 MovePlayerVector()
+    {
+        float moveHorizontal = Input.GetAxis("Horizontal");
+        float moveVertical = Input.GetAxis("Vertical");
+
+        Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
+
+        return movement;
     }
     void OnCollisionEnter(Collision collision)
     {

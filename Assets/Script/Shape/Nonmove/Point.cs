@@ -12,7 +12,7 @@ public class Point : NonMove
     {
         if (other.gameObject.CompareTag("PlayerBall") || other.gameObject.CompareTag("PlayerCube"))
         {
-            GameManager.Instance.IncreasePoint();
+            LevelManager.InstanceLevel.IncreasePoint();
             Destroy(gameObject);
         }
     }

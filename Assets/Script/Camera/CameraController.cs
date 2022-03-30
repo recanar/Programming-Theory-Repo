@@ -8,15 +8,13 @@ public class CameraController : MonoBehaviour
     GameObject activePlayer;
     private void Update()
     {
-        int i = 0;
-        while (true)
+        for (int i = 0; i < player.transform.childCount; i++)
         {
             if (player.transform.GetChild(i).gameObject.activeSelf)
             {
                 activePlayer = player.transform.GetChild(i).gameObject;
                 break;
             }
-            i++;
         }
 
         transform.position = activePlayer.transform.position + new Vector3(0, 10, -10);

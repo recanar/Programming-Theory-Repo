@@ -8,7 +8,7 @@ public class CubePoint : Point
     {
         if (other.gameObject.CompareTag("PlayerCube"))
         {
-            GameManager.Instance.IncreasePoint();
+            LevelManager.InstanceLevel.IncreasePoint();
             Destroy(gameObject);
         }
     }
