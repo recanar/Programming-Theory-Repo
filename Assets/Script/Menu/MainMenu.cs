@@ -7,6 +7,7 @@ public class MainMenu : MonoBehaviour
 {
     [SerializeField] GameObject levels;
     [SerializeField] GameObject mainMenu;
+    [SerializeField] GameObject menuObjects;//some in game objects from game to increase visuals
     public void StartGame()
     {
         SceneManager.LoadScene("Level1");
@@ -14,11 +15,13 @@ public class MainMenu : MonoBehaviour
     public void LevelSelectScreen ()
     {
         mainMenu.SetActive(false);
+        menuObjects.SetActive(false);
         levels.SetActive(true);
     }
     public void BackToMenu()
     {
         levels.SetActive(false);
         mainMenu.SetActive(true);
+        menuObjects.SetActive(true);
     }
 }

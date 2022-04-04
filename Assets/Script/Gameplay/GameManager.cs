@@ -7,9 +7,7 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-
     [SerializeField] private GameObject player;
-    [SerializeField] private List<GameObject> playerShapes;
 
     public Vector3 playerPosition;
     public int point;
@@ -26,15 +24,6 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
         FindPlayerOnTheCurrentScene();//after new scene loaded GameManager finds players on the current scene 
     }
-    
-    public void GetPlayerShapes()//get player shapes at start of level for manage them
-    {
-        playerShapes = new List<GameObject>();
-        for (int i = 0; i < player.transform.childCount; i++)
-        {
-            playerShapes.Add(player.transform.GetChild(i).gameObject);
-        }
-    }
     public void PlayerShapeChange(string tag)
     {
         for (int i = 0; i < player.transform.childCount; i++)
@@ -44,14 +33,6 @@ public class GameManager : MonoBehaviour
                 player.transform.GetChild(i).position = playerPosition;//match new shape with player's current position after change
                 player.transform.GetChild(i).gameObject.SetActive(true);
             }
-        }
-    }
-    public void ResetPlayerShapes()//reset player shapes physics on shape change 
-    {
-        for (int i = 0; i < player.transform.childCount; i++)
-        {
-            playerShapes[i].GetComponent<Rigidbody>().velocity = Vector3.zero;
-            playerShapes[i].GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
         }
     }
     #region Player finder
