@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,7 +7,7 @@ public class Point : NonMove
 {
     void Update()
     {
-        transform.Rotate(new Vector3(0, 45, 0) * Time.deltaTime);
+        Rotate();
     }
     protected virtual void OnTriggerEnter(Collider other)
     {
@@ -16,4 +17,9 @@ public class Point : NonMove
             Destroy(gameObject);
         }
     }
+    private void Rotate()
+    {
+        transform.Rotate(new Vector3(0, 45, 0) * Time.deltaTime);
+    }
+
 }
