@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 539565302208113131}
   m_LocalRotation: {x: 0, y: 0, z: -0.21643952, w: 0.97629607}
   m_LocalPosition: {x: 0.182, y: 1.173, z: 0}
-  m_LocalScale: {x: -0.25, y: 1, z: 0.25}
+  m_LocalScale: {x: 0.25, y: 1, z: 0.25}
   m_Children: []
   m_Father: {fileID: 539565302536769730}
   m_RootOrder: 0
@@ -90,7 +90,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 539565302208113131}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -107,6 +107,7 @@ GameObject:
   - component: {fileID: 539565302536769731}
   - component: {fileID: 539565302536769732}
   - component: {fileID: 539565302536769733}
+  - component: {fileID: 2035477358398506690}
   m_Layer: 0
   m_Name: BlueChanger
   m_TagString: Untagged
@@ -186,9 +187,21 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 539565302536769734}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5000001
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+--- !u!114 &2035477358398506690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 539565302536769734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 406c188e5a5400143b5312e7998e6a2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

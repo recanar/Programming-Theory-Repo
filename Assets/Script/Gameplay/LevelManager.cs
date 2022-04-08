@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class LevelManager : MonoBehaviour
 {
     [SerializeField] int point;
+    int countThisLevelPoints;
     public static LevelManager InstanceLevel { get; private set; }
 
     public int numPickups = 6;
@@ -25,16 +26,17 @@ public class LevelManager : MonoBehaviour
     private void Start()
     {
         point = 0;
+        countThisLevelPoints = GameObject.FindGameObjectsWithTag("Point").Length;
     }
     void Update()
     {
-        pointText.text = "Points:" +point+ "/6";
+        pointText.text = "Points:" +point+ "/"+ countThisLevelPoints;
         
         CheckLevelUpWithPoint();
     }
     void CheckLevelUpWithPoint()
     {
-        if (point == 6)
+        if (point == countThisLevelPoints)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
         }
