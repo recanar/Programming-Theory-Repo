@@ -38,8 +38,14 @@ public abstract class Player : Shape
     }
     protected virtual Vector3 MovePlayerVector()
     {
-        float moveHorizontal = Input.GetAxis("Horizontal");
-        float moveVertical = Input.GetAxis("Vertical");
+        float moveHorizontal,moveVertical;
+#if UNITY_ANDROID
+            moveHorizontal = LevelManager.InstanceLevel.joystick.Horizontal;
+            moveVertical = LevelManager.InstanceLevel.joystick.Vertical;
+#elif UNITY_EDITOR_WIN
+            moveHorizontal = Input.GetAxis("Horizontal");
+            moveVertical = Input.GetAxis("Vertical");
+#endif
 
         Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
 

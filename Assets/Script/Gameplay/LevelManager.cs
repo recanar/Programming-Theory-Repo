@@ -8,6 +8,7 @@ public class LevelManager : MonoBehaviour
 {
     [SerializeField] int point;
     int countThisLevelPoints;
+    public FloatingJoystick joystick;
     public static LevelManager InstanceLevel { get; private set; }
 
     public int numPickups = 6;
@@ -25,6 +26,11 @@ public class LevelManager : MonoBehaviour
     }
     private void Start()
     {
+#if UNITY_ANDROID
+        joystick.gameObject.SetActive(true);
+#elif UNITY_IOS
+        joystick.gameObject.SetActive(true);
+#endif
         point = 0;
         countThisLevelPoints = GameObject.FindGameObjectsWithTag("Point").Length;
     }
